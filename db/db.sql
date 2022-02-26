@@ -1,0 +1,3 @@
+USE DATABASE IF EXISTS work;
+CREATE DATABASE work;
+USE work;
