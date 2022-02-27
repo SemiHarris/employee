@@ -2,6 +2,8 @@ const express = require("express");
 const db = require('./db/connection');
 const fetch = require('node-fetch');
 const apiRoutes = require('./routes/apiRoutes');
+const inquirer = require("inquirer");
+const { response } = require("express");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
@@ -26,11 +28,37 @@ const getEmployee = () =>
     },
 });
 
+const addData = () => {
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'add',
+      message: 'What database would you like to add to?(employee, role, or department)'
+  }
+]).then(result => {console.log(result.add)})
+}
+
+const question = () => {
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'choice',
+      message: 'Would you like to ADD, UPDATE, or DELETE a database?'
+    }
+  ]).then(x => {
+    if(x.choice = 'Add' || x.choice === 'ADD' || x.choice === 'add'){
+      addData()
+    }
+  })
+
+  
+}
+
 const displayEmployee = async (worker) => {
   let jsonWorkers = await worker.json().then(x => {return x});
 
   console.table(jsonWorkers.data)
-
+  question()
 }
 
 
