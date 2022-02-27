@@ -3,7 +3,13 @@ const router = express.Router();
 const db = require('../../db/connection');
 
 router.get('/employee', (req, res) => {
-    const sql = `SELECT * FROM employee ORDER BY last_name`;
+    const sql = `SELECT t.first_name, t.last_name,
+    position.title AS role_name,
+    m.first_name AS manager_name
+    FROM employee t
+    LEFT JOIN employee m ON m.id = t.manager_id
+    LEFT JOIN position ON t.role_id = position.id
+    ORDER BY last_name`;
   
     db.query(sql, (err, rows) => {
       if (err) {

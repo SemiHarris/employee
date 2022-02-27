@@ -48,3 +48,15 @@ VALUES
 -- SELECT position.*, department.name AS department_name
 -- FROM position
 -- LEFT JOIN department ON position.department_id = department.id;
+
+
+SELECT employee.*, position.title AS role_name
+FROM employee
+LEFT JOIN position ON employee.role_id = position.id;
+
+SELECT t.first_name, t.last_name,
+position.title AS role_name,
+m.first_name AS manager_name
+FROM employee t
+LEFT JOIN employee m ON m.id = t.manager_id
+LEFT JOIN position ON t.role_id = position.id;
