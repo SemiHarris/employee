@@ -20,7 +20,7 @@ CREATE TABLE employee (
   first_name VARCHAR(30),
   last_name VARCHAR(30),
   role_id INTEGER,
-  manager_id INTEGER DEFAULT NULL,
+  manager_id INTEGER DEFAULT NULL REFERENCES employee(id),
   CONSTRAINT fk_position FOREIGN KEY (role_id) REFERENCES work.position(id)  ON DELETE SET NULL
 );
 

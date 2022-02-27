@@ -25,11 +25,26 @@ VALUES
     (13, 'Store Attendent', 4 , 6),
     (14, 'Store Attendent', 4 , 7);
 
-INSET INTO employee (first_name, last_name, role_id)
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES
+    ('Semi','Harris', 1, NULL),
+    ('Terrel','Jones', 2, NULL),
+    ('Chandle','Jones', 3, NULL),
+    ('Cooper','Kupp', 4, NULL),
+    ('Aaron', 'Donald', 5, NULL),
+    ('Jamar', 'Chase', 6, NULL),
+    ('Deebo', 'Samuel', 7, NULL),
+    ('Mac', 'Jones', 8, 1),
+    ('Russel', 'Wilson', 9, 2),
+    ('Kyler', 'Murray', 10, 3),
+    ('Mathew', 'Stafford', 11, 4),
+    ('Odall', 'Beckham', 12, 5),
+    ('Joe', 'Burrow', 13, 6),
+    ('George', 'Kittle', 14, 7);
 
 
 
 
-SELECT position.*, department.name AS department_name
-FROM position
-LEFT JOIN department ON position.department_id = department.id;
+-- SELECT position.*, department.name AS department_name
+-- FROM position
+-- LEFT JOIN department ON position.department_id = department.id;
