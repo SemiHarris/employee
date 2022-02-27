@@ -34,6 +34,21 @@ router.get('/employee/:id', (req, res) => {
     });
 }); 
 
+router.post('/employee', ({ body }, res) => {
+const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)`;
+const params = [body.first_name, body.last_name, body.role, body.manager];
+
+db.query(sql, params, (err, result) => {
+  if (err) {
+    res.status(400).json({ error: err.message });
+    return;
+  }
+  res.json({
+    message: 'success',
+    data: body
+  });
+});
+});
 
 router.put('/employee/first_name/:id', (req, res) => {
   const sql = `UPDATE employee SET first_name = ? WHERE id = ?`;
