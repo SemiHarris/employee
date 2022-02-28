@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../../db/connection');
 
 router.get('/employee', (req, res) => {
-    const sql = `SELECT t.first_name, t.last_name,
+    const sql = `SELECT t.id, t.first_name, t.last_name,
     position.title AS role_name,
     m.first_name AS manager_name
     FROM employee t
@@ -98,9 +98,9 @@ router.put('/employee/last_name/:id', (req, res) => {
     });
 });
 
-router.put('/employee/role/:id', (req, res) => {
-  const sql = `UPDATE employee SET role = ? WHERE id = ?`;
-  const params = [req.body.role, req.params.id];
+router.put('/employee/role_id/:id', (req, res) => {
+  const sql = `UPDATE employee SET role_id = ? WHERE id = ?`;
+  const params = [req.body.role_id, req.params.id];
 
   db.query(sql, params, (err, result) => {
     if (err) {
@@ -119,9 +119,9 @@ router.put('/employee/role/:id', (req, res) => {
   });
 });
 
-router.put('/employee/manager/:id', (req, res) => {
-  const sql = `UPDATE manager SET role = ? WHERE id = ?`;
-  const params = [req.body.manager, req.params.id];
+router.put('/employee/manager_id/:id', (req, res) => {
+  const sql = `UPDATE employee SET manager_id = ? WHERE id = ?`;
+  const params = [req.body.manager_id, req.params.id];
 
   db.query(sql, params, (err, result) => {
     if (err) {

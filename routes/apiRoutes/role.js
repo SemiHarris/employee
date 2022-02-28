@@ -75,7 +75,7 @@ router.put('/role/salary/:id', (req, res) => {
     });
 });
 
-router.put('/role/department/:id', (req, res) => {
+router.put('/role/department_id/:id', (req, res) => {
     const sql = `UPDATE position SET department_id = ? WHERE id = ?`;
     const params = [req.body.department_id, req.params.id];
   
