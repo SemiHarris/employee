@@ -46,7 +46,8 @@ const addData = () => {
       message: 'What database would you like to add to?(employee, role, or department)'
   }
 ]).then(result => {
-  if (result.add = 'employee') {
+  console.log(result.add)
+  if (result.add === 'employee') {
     inquirer.prompt([
       {
         type: 'input',
@@ -72,6 +73,39 @@ const addData = () => {
       console.log(result)
       postData('employee', result)
     })
+  } else if (result.add === 'role') {
+    inquirer.prompt([
+      {
+        type: 'input',
+        name: 'title',
+        message: 'What is the name of the position?'
+      },
+      {
+        type: 'number',
+        name: 'salary',
+        message: 'What is the salary of this position?'
+      },
+      {
+        type: 'number',
+        name: 'department_id',
+        message: 'What is the deapatment ID?'
+      }
+    ]).then(result => {
+      postData('role', result)
+    })
+  } else if (result.add === 'department') {
+    inquirer.prompt([
+      {
+        type: 'input',
+        name: 'name',
+        message: 'What is the name of the department?'
+      }
+    ]).then(result => {
+      postData('department', result)
+    })
+  } else {
+    console.log('Please enter a valid database!')
+    addData()
   }
 })
 }

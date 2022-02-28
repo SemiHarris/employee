@@ -18,9 +18,8 @@ router.get('/role', (req, res) => {
 });
 
 router.post('/role', ({ body }, res) => {
-    const sql = `INSERT INTO position (id, title, salary, department_id) VALUES (?,?,?,?)`;
-    console.log(body.department_id)
-    const params = [body.id, body.title, body.salary, body.department_id];
+  const sql = `INSERT INTO work.position (id, title, salary, department_id) VALUES (?,?,?,?)`;
+  const params = [body.id, body.title, body.salary, body.department_id];
     
     db.query(sql, params, (err, result) => {
       if (err) {

@@ -10,13 +10,13 @@ VALUES
 
 INSERT INTO position (id, title, salary, department_id)
 VALUES
-    (1, 'Manager',6.33 , 1),
-    (2, 'Manager',6.33 , 2),
-    (3, 'Manager',6.33 , 3),
-    (4, 'Manager',6.33 , 4),
-    (5, 'Manager',6.33 , 5),
-    (6, 'Manager',6.33 , 6),
-    (7, 'Manager',6.33 , 7),
+    (1, 'Manager',6, 1),
+    (2, 'Manager',6, 2),
+    (3, 'Manager',6, 3),
+    (4, 'Manager',6, 4),
+    (5, 'Manager',6, 5),
+    (6, 'Manager',6, 6),
+    (7, 'Manager',6, 7),
     (8, 'Store Attendent', 4 , 1),
     (9, 'Store Attendent', 4 , 2),
     (10, 'Store Attendent', 4 , 3),
