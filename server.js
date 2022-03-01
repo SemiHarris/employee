@@ -42,6 +42,14 @@ const putData = (query, data) =>
     body: JSON.stringify(data),
 });
 
+const deleteData = (query) =>
+  fetch(('http://localhost:3001/api/' + query), {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+});
+
 const addData = () => {
   inquirer.prompt([
     {
@@ -233,6 +241,54 @@ const updateData = () => {
   })
 }
 
+const removeData = () => {
+  inquirer.prompt([
+    {
+      type: 'list',
+      name: 'selection',
+      message: 'Which database do you want to delete data from?',
+      choices: ['employee','role','department']
+    }
+  ]).then(result => {
+    if (result.selection === 'employee') {
+      inquirer.prompt([
+        {
+          type: 'number',
+          name: 'employeeID',
+          message: 'What is the ID of the employee you want to delete?'
+        }
+      ]).then(result => {
+        deleteData('employee/' + result.employeeID)
+        renderEmployee()
+      })
+    }else if (result.selection === 'role'){
+      inquirer.prompt([
+        {
+          type: 'number',
+          name: 'role_id',
+          message: 'What is the ID of the role you want to delete?'
+        }
+      ]).then(result => {
+        deleteData('role/' + result.role_id);
+        renderRole()
+        question()
+      })
+    }else {
+      inquirer.prompt([
+        {
+          type: 'number',
+          name: 'department_id',
+          message: 'What is the ID of the department you want to delete?'
+        }
+      ]).then(result => {
+        deleteData('department/' + result.department_id);
+        renderDepartment()
+        question()
+      })
+    }
+  })
+}
+
 const question = () => {
   inquirer.prompt([
     {
@@ -245,6 +301,10 @@ const question = () => {
       addData()
     }else if (x.choice === 'Update' || x.choice === 'UPDATE' || x.choice === 'update') {
       updateData()
+    }else if (x.choice === 'Delete' || x.choice === 'DELETE' || x.choice === 'delete') {
+      removeData()
+    }else if (x.choice === 'View' || x.choice === 'VIEW' || x.choice === 'view') {
+      
     }
   })
 
