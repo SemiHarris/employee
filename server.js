@@ -82,8 +82,15 @@ const addData = () => {
         message: 'What is the mangers ID?(If none leave blank)'
       }
     ]).then(result => {
-      console.log(result)
-      postData('employee', result)
+      data = {
+        first_name: result.first_name, 
+        last_name: result.last_name, 
+        role_id: parseInt(result.role_id),
+        manager_id: parseInt(result.manager_id)
+      }
+      console.log(data)
+      postData('employee', data);
+      renderEmployee();
     })
   } else if (result.add === 'role') {
     inquirer.prompt([
@@ -195,22 +202,19 @@ const updateData = () => {
 
           putData('role/' + result.selection + '/' + result.id, data)
 
-          renderRole()
-          question()
+          renderRole();
         }else if (result.selection === 'salary') {
           data = {salary: parseInt(result.change)}
 
           putData('role/' + result.selection + '/' + result.id, data)
           
           renderRole()
-          question()
         }else {
           data = {department_id: parseInt(result.change)}
 
           putData('role/' + result.selection + '/' + result.id, data)
           
           renderRole()
-          question()
         }
       })
     } else if (result.selection === 'department') {
@@ -231,7 +235,6 @@ const updateData = () => {
         putData('department/name/' + result.id, data)
         
         renderDepartment()
-        question()
       })
     }else {
       console.log('Please enter a valid data base!')
@@ -271,7 +274,6 @@ const removeData = () => {
       ]).then(result => {
         deleteData('role/' + result.role_id);
         renderRole()
-        question()
       })
     }else {
       inquirer.prompt([
@@ -283,8 +285,26 @@ const removeData = () => {
       ]).then(result => {
         deleteData('department/' + result.department_id);
         renderDepartment()
-        question()
       })
+    }
+  })
+}
+
+const viewData = () => {
+  inquirer.prompt([
+    {
+      type: 'list',
+      name: 'select',
+      message: 'What database do you want to view?',
+      choices: ['employee','role','department']
+    }
+  ]).then(result => {
+    if (result.select === 'employee') {
+      renderEmployee()
+    }else if (result.select === 'role') {
+      renderRole()
+    }else {
+      renderDepartment()
     }
   })
 }
@@ -304,7 +324,11 @@ const question = () => {
     }else if (x.choice === 'Delete' || x.choice === 'DELETE' || x.choice === 'delete') {
       removeData()
     }else if (x.choice === 'View' || x.choice === 'VIEW' || x.choice === 'view') {
-      
+      viewData()
+    }else {
+      console.log('Please enter a valid choice.')
+
+      question()
     }
   })
 
@@ -322,12 +346,14 @@ const displayRole = async (role) => {
   let jsonRole = await role.json().then(x => {return x});
 
   console.table(jsonRole.data)
+  question()
 }
 
 const displayDepartment = async (department) => {
   let jsonDepartment = await department.json().then(x => {return x});
 
   console.table(jsonDepartment.data)
+  question()
 }
 
 
