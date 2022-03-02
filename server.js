@@ -50,6 +50,7 @@ const deleteData = (query) =>
     },
 });
 
+/*This adds data by ID*/
 const addData = () => {
   inquirer.prompt([
     {
@@ -59,6 +60,7 @@ const addData = () => {
   }
 ]).then(result => {
   console.log(result.add)
+   /*This adds data to employee database*/
   if (result.add === 'employee') {
     inquirer.prompt([
       {
@@ -93,6 +95,7 @@ const addData = () => {
       renderEmployee();
     })
   } else if (result.add === 'role') {
+    /*This add data to the role database*/
     inquirer.prompt([
       {
         type: 'input',
@@ -113,6 +116,7 @@ const addData = () => {
       postData('role', result)
     })
   } else if (result.add === 'department') {
+    /*This adds data to the department database*/
     inquirer.prompt([
       {
         type: 'input',
@@ -130,6 +134,7 @@ const addData = () => {
 })
 }
 
+/*This updates data by ID*/
 const updateData = () => {
   inquirer.prompt([
     {
@@ -138,6 +143,7 @@ const updateData = () => {
       message: 'Whould you like to upadate a employee, role or department?'
     }
   ]).then(result => {
+    /*This updates the employee based on ID*/
     if (result.selection === 'employee'){
       inquirer.prompt([
         {
@@ -157,6 +163,7 @@ const updateData = () => {
           message: 'What would you like to change it to?'
         }
       ]).then(result => {
+        /*This updates the database in the employee database*/
         if (result.selection === 'first_name'){
           data = {first_name: result.change}
           
@@ -179,6 +186,7 @@ const updateData = () => {
           renderEmployee();
         }})
     } else if (result.selection === 'role'){
+      /*This updates the role data based on ID*/
       inquirer.prompt([
         {
           type: 'input',
@@ -197,6 +205,7 @@ const updateData = () => {
           message: 'What would you like to change it to?'
         }
       ]).then(result => {
+        /*This updates the data in the role database by ID*/
         if (result.selection === 'title') {
           data = {title: result.change}
 
@@ -218,6 +227,7 @@ const updateData = () => {
         }
       })
     } else if (result.selection === 'department') {
+      /*This updates the department database by ID*/
       inquirer.prompt([
         {
           type: 'input',
@@ -230,6 +240,7 @@ const updateData = () => {
           message: 'What would you like to change the name to?'
         }
       ]).then(result => {
+        /*This updates the department name*/
         data = {name: result.name}
       
         putData('department/name/' + result.id, data)
@@ -244,6 +255,7 @@ const updateData = () => {
   })
 }
 
+/*This deletes data by ID*/
 const removeData = () => {
   inquirer.prompt([
     {
@@ -253,6 +265,7 @@ const removeData = () => {
       choices: ['employee','role','department']
     }
   ]).then(result => {
+    /*This deletes data from the employee database by ID*/
     if (result.selection === 'employee') {
       inquirer.prompt([
         {
@@ -265,6 +278,7 @@ const removeData = () => {
         renderEmployee()
       })
     }else if (result.selection === 'role'){
+      /*This deletes data from the role database by ID*/
       inquirer.prompt([
         {
           type: 'number',
@@ -276,6 +290,7 @@ const removeData = () => {
         renderRole()
       })
     }else {
+      /*This deletes data from the department database by ID*/
       inquirer.prompt([
         {
           type: 'number',
@@ -290,6 +305,7 @@ const removeData = () => {
   })
 }
 
+/*This sends a GET request for each database and the displays it as a table*/
 const viewData = () => {
   inquirer.prompt([
     {
@@ -309,6 +325,7 @@ const viewData = () => {
   })
 }
 
+/*This asks what they want to do to a database*/
 const question = () => {
   inquirer.prompt([
     {
@@ -335,6 +352,7 @@ const question = () => {
   
 }
 
+/*This diplays the employee database as a table*/
 const displayEmployee = async (worker) => {
   let jsonWorkers = await worker.json().then(x => {return x});
 
@@ -342,6 +360,7 @@ const displayEmployee = async (worker) => {
   question()
 }
 
+/*This displays the role database as a table*/
 const displayRole = async (role) => {
   let jsonRole = await role.json().then(x => {return x});
 
@@ -349,6 +368,7 @@ const displayRole = async (role) => {
   question()
 }
 
+/*This displays the department database as a table*/
 const displayDepartment = async (department) => {
   let jsonDepartment = await department.json().then(x => {return x});
 
