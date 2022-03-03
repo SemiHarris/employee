@@ -24,6 +24,8 @@ You typing npm start in your terminal
 
 
 ## Questions
-https://github.com/SemiHarris
+Github: https://github.com/SemiHarris
 
-semiharris3@gmail.com
+Email: semiharris3@gmail.com
+
+Demo:
