@@ -28,4 +28,4 @@ Github: https://github.com/SemiHarris
 
 Email: semiharris3@gmail.com
 
-Demo: chrome-extension://mmeijimgabbpbgpdklnllpncmdofkcpn/app.html#/files/6f9994cf-4667-4446-yaef-2f9e5c46f3a8
+Demo: mmeijimgabbpbgpdklnllpncmdofkcpn/app.html#/files/6f9994cf-4667-4446-yaef-2f9e5c46f3a8
